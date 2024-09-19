@@ -5,8 +5,8 @@ import java.util.Arrays;
 public class Variant1 {
 
     /**
-     * @param k a 3-digit number
-     * @return the first digit moved to last
+     * Дано тризначне число. В ньому закреслили першу ліворуч цифру і приписали її праворуч.
+     * Вивести отримане число.
      */
 
     public int integerNumbersTask(int k) {
@@ -23,8 +23,8 @@ public class Variant1 {
     }
 
     /**
-     * @param numbers is an array of integers
-     * @return true, if number is positive
+     * Дано три цілих числа: A, B, C.
+     * Перевірити істинність висловлювання: Хоча б одне з чисел A, B, C позитивне;
      */
     public boolean booleanTask(int[] numbers) {
         for (int number : numbers) {
@@ -37,12 +37,9 @@ public class Variant1 {
 
 
     /**
-     * @param numbers is an array of integers
-     * @return is the median int
+     * Дано три числа. Знайти середнє з них (тобто є число, розташоване між найменшим і найбільшим)
      */
     public int ifTask(int[] numbers) {
-//        Arrays.sort(numbers); Я загрався треба ж if-ом робити)
-//        return numbers[1];
         int a = numbers[0], b = numbers[1], c = numbers[2];
         int median;
         if ((a >= b && a <= c) || (a >= c && a <= b)) {
@@ -57,8 +54,13 @@ public class Variant1 {
 
 
     /**
-     * @param elementNumber what is given, value the measurement of given thing
-     * @return Triangle measurement
+     * Елементи рівнобедреного прямокутного трикутника пронумеровані в такий спосіб:
+     *  1 — катет a,
+     *  2 — гіпотенуза c = a·2^1/2,
+     *  3 — висота h, опущена на гіпотенузу (h = c/2),
+     *  4 — площа S = c·h/2.
+     *  Даний номер одного з цих елементів і його значення.
+     *  Вивести значення решти елементів даного трикутника (в тому ж порядку).
      */
     public double[] switchTask(int elementNumber, double value) {
         double a, c, h, s;
@@ -101,8 +103,8 @@ public class Variant1 {
 
 
     /**
-     * @param n is integer number
-     * @return approximated value of exp(1)
+     * Дано ціле число N (> 0). Знайти значення виражень
+     * 1.1 – 1.2 + 1.3 – …
      */
     public double forTask(int n) {
         assert n > 0 : "Argument should be more than zero";
@@ -118,6 +120,10 @@ public class Variant1 {
         return Math.round(result * 10.0) / 10.0;
     }
 
+    /**
+     * Дано число A (>1). Вивести найменше з цілих чисел K,
+     * для яких сума 1 + 1/2 + … + 1/K буде більше A, і саму цю суму.
+     */
 
     public double[] whileTask(double a) {
         if (a < 0) {
@@ -132,6 +138,12 @@ public class Variant1 {
         }
         return new double[]{k - 1, sum};
     }
+
+    /**
+     * Дано масив A розміру N (N — непарне число).
+     * Вивести його елементи з непарними індексів в порядку зменшення індексів
+     * Умовний оператор не використовує.
+     */
 
     public double[] arrayTask(double[] array) {
         int n = array.length;
@@ -157,7 +169,6 @@ public class Variant1 {
      *  крім першого (вже виведеного) елемента; елементи другого рядка, що залишилися;
      *  елементи, що залишилися у передостанньому стовпці й т. д.;
      *  останнім виводиться елемент A[M,M]>.
-     * @return перетворена матриця
      */
     public int[][] twoDimensionArrayTask(int[][] matrix) {
         int initMatrixSize = matrix.length;
