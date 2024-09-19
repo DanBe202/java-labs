@@ -1,8 +1,8 @@
-package lab0;
+package javaStatementsLab;
 
 import java.util.Arrays;
 
-public class Variant1 {
+public class Variant13 {
 
     /**
      * Дано тризначне число. В ньому закреслили першу ліворуч цифру і приписали її праворуч.

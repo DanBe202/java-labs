@@ -5,13 +5,13 @@ import static org.testng.Assert.assertEquals;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import lab0.Variant1;
+import javaStatementsLab.Variant13;
 
-public class TestVariant1 {
+public class TestVariant13 {
 
     @Test(dataProvider = "integerProvider")
     public void inputTest(int p1, int p3) {
-        assertEquals(new Variant1().integerNumbersTask(p1), p3);
+        assertEquals(new Variant13().integerNumbersTask(p1), p3);
     }
 
     @DataProvider
@@ -21,12 +21,12 @@ public class TestVariant1 {
 
     @Test(expectedExceptions = AssertionError.class)
     public void negativeIntegerTest() {
-        new Variant1().integerNumbersTask(-2);
+        new Variant13().integerNumbersTask(-2);
     }
 
     @Test(dataProvider = "ifProvider")
     public void ifTest(int p1, int p2, int p3, int p4) {
-        assertEquals(new Variant1().ifTask(new int[]{p1, p2, p3}), p4);
+        assertEquals(new Variant13().ifTask(new int[]{p1, p2, p3}), p4);
     }
 
     @DataProvider
@@ -36,7 +36,7 @@ public class TestVariant1 {
 
     @Test(dataProvider = "booleanProvider")
     public void booleanTest(int p1, int p2, int p3, boolean p4) {
-        assertEquals(new Variant1().booleanTask(new int[]{p1, p2, p3}), p4);
+        assertEquals(new Variant13().booleanTask(new int[]{p1, p2, p3}), p4);
     }
 
     @DataProvider
@@ -47,7 +47,7 @@ public class TestVariant1 {
 
     @Test(dataProvider = "switchProvider")
     public void switchTest(int p1, double p2, double[] expected) {
-        assertEquals(new Variant1().switchTask(p1, p2), expected);
+        assertEquals(new Variant13().switchTask(p1, p2), expected);
     }
 
     @DataProvider
@@ -62,7 +62,7 @@ public class TestVariant1 {
 
     @Test(dataProvider = "forProvider")
     public void forTest(int n, double p2) {
-        assertEquals(new Variant1().forTask(n), p2);
+        assertEquals(new Variant13().forTask(n), p2);
     }
 
     @DataProvider
@@ -72,7 +72,7 @@ public class TestVariant1 {
 
     @Test(dataProvider = "whileProvider")
     public void whileTest(double a, double[] expected) {
-        assertEquals(new Variant1().whileTask(a), expected);
+        assertEquals(new Variant13().whileTask(a), expected);
     }
 
     @DataProvider
@@ -88,7 +88,7 @@ public class TestVariant1 {
 
     @Test(expectedExceptions = AssertionError.class, dataProvider = "negativeWhileProvider")
     public void negativeWhileTest(int a) {
-        new Variant1().whileTask(a);
+        new Variant13().whileTask(a);
     }
 
     @DataProvider
@@ -98,7 +98,7 @@ public class TestVariant1 {
 
     @Test(dataProvider = "arrayProvider")
     public void arrayTest(double[] array, double[] expected) {
-        assertEquals(new Variant1().arrayTask(array), expected);
+        assertEquals(new Variant13().arrayTask(array), expected);
     }
 
     @DataProvider
@@ -120,7 +120,7 @@ public class TestVariant1 {
 //  останнім виводиться елемент A[M,]>.
     @Test(dataProvider = "matrixProvider")
     public void twoDimensionArrayTest(int[][] input, int[][] output) {
-        assertEquals(new Variant1().twoDimensionArrayTask(input), output);
+        assertEquals(new Variant13().twoDimensionArrayTask(input), output);
     }
 
     @DataProvider
