@@ -1,6 +1,8 @@
 package classesLab;
 
-import java.util.Date;
+import classesLab.enums.PaymentStates;
+
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -8,27 +10,27 @@ import java.util.Objects;
  * Includes details about the room number, client, check-in and check-out dates, and payment status.
  */
 public class Reservation {
-    private int roomNumber;
-    private Client client;
-    private Date enterDate;
-    private Date departureDate;
-    private Boolean isPaid;
+    private final HotelRoom room;
+    private final Client client;
+    private final LocalDate enterDate;
+    private final LocalDate departureDate;
+    private final PaymentStates payment;
 
     /**
      * Constructs a new Reservation object with the specified details.
      *
-     * @param roomNumber the number of the room reserved
+     * @param room the reserved room
      * @param client the Client who made the reservation
      * @param enterDate the date when the client will check in
      * @param departureDate the date when the client will check out
-     * @param isPaid indicates whether the reservation has been paid for
+     * @param payment indicates whether the reservation has been paid for
      */
-    public Reservation(int roomNumber, Client client, Date enterDate, Date departureDate, Boolean isPaid) {
-        this.roomNumber = roomNumber;
+    public Reservation(HotelRoom room, Client client, LocalDate enterDate, LocalDate departureDate, PaymentStates payment) {
+        this.room = room;
         this.client = client;
         this.enterDate = enterDate;
         this.departureDate = departureDate;
-        this.isPaid = isPaid;
+        this.payment = payment;
     }
 
     /**
@@ -36,8 +38,8 @@ public class Reservation {
      *
      * @return the room number
      */
-    public int getRoomNumber() {
-        return roomNumber;
+    public HotelRoom getRoomNumber() {
+        return this.room;
     }
 
     /**
@@ -46,7 +48,7 @@ public class Reservation {
      * @return the client
      */
     public Client getClient() {
-        return client;
+        return this.client;
     }
 
     /**
@@ -54,8 +56,8 @@ public class Reservation {
      *
      * @return the check-in date
      */
-    public Date getEnterDate() {
-        return enterDate;
+    public LocalDate getEnterDate() {
+        return this.enterDate;
     }
 
     /**
@@ -63,8 +65,8 @@ public class Reservation {
      *
      * @return the check-out date
      */
-    public Date getDepartureDate() {
-        return departureDate;
+    public LocalDate getDepartureDate() {
+        return this.departureDate;
     }
 
     /**
@@ -72,8 +74,8 @@ public class Reservation {
      *
      * @return {@code true} if the reservation is paid, {@code false} otherwise
      */
-    public Boolean getIsPaid() {
-        return isPaid;
+    public PaymentStates getPayment() {
+        return this.payment;
     }
 
     /**
@@ -85,11 +87,11 @@ public class Reservation {
     @Override
     public String toString() {
         return "Reservation{" +
-                "roomNumber=" + roomNumber +
-                ", client=" + client +
-                ", enterDate=" + enterDate +
-                ", departureDate=" + departureDate +
-                ", isPaid=" + isPaid +
+                "room=" + this.room.getNumber() +
+                ", client=" + this.client +
+                ", enterDate=" + this.enterDate +
+                ", departureDate=" + this.departureDate +
+                ", paymentStatus=" + this.payment +
                 '}';
     }
 
@@ -106,22 +108,21 @@ public class Reservation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Reservation that = (Reservation) o;
-        return roomNumber == that.roomNumber &&
-                client.equals(that.client) &&
-                enterDate.equals(that.enterDate) &&
-                departureDate.equals(that.departureDate) &&
-                isPaid.equals(that.isPaid);
+        return this.room == that.room &&
+                this.client.equals(that.client) &&
+                this.enterDate.equals(that.enterDate) &&
+                this.departureDate.equals(that.departureDate) &&
+                this.payment.equals(that.payment);
     }
 
     /**
      * Returns the hash code value for this Reservation object.
-     * The hash code is computed based on the room number, client, check-in and check-out dates,
-     * and payment status.
+     * The hash code is computed based on the room number, client, check-in and check-out dates.
      *
      * @return the hash code of the reservation
      */
     @Override
     public int hashCode() {
-        return Objects.hash(roomNumber, client, enterDate, departureDate, isPaid);
+        return Objects.hash(this.room, this.client, this.enterDate, this.departureDate);
     }
 }

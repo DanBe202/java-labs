@@ -1,29 +1,29 @@
 package classesLab;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
  * Represents a client with personal details including their name, document status, and date of birth.
  */
 public class Client {
-    private String firstName;
-    private String lastName;
-    private Boolean documents;
-    private Date dateOfBirth;
+    private final String firstName;
+    private final String lastName;
+    private final String passportId;
+    private final LocalDate dateOfBirth;
 
     /**
      * Constructs a new Client object with the specified details.
      *
      * @param firstName the first name of the client
      * @param lastName the last name of the client
-     * @param documents the document status of the client (e.g., whether documents are provided)
+     * @param passportId the document status of the client (e.g., whether documents are provided)
      * @param dateOfBirth the date of birth of the client
      */
-    public Client(String firstName, String lastName, Boolean documents, Date dateOfBirth) {
+    public Client(String firstName, String lastName, String passportId, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.documents = documents;
+        this.passportId = passportId;
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -35,10 +35,10 @@ public class Client {
     @Override
     public String toString() {
         return "Client{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", documents=" + documents +
-                ", dateOfBirth=" + dateOfBirth +
+                "firstName='" + this.firstName + '\'' +
+                ", lastName='" + this.lastName + '\'' +
+                ", passportId=" + this.passportId +
+                ", dateOfBirth=" + this.dateOfBirth +
                 '}';
     }
 
@@ -54,10 +54,10 @@ public class Client {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return firstName.equals(client.firstName) &&
-                lastName.equals(client.lastName) &&
-                documents.equals(client.documents) &&
-                dateOfBirth.equals(client.dateOfBirth);
+        return this.firstName.equals(client.firstName) &&
+                this.lastName.equals(client.lastName) &&
+                this.passportId.equals(client.passportId) &&
+                this.dateOfBirth.equals(client.dateOfBirth);
     }
 
     /**
@@ -68,7 +68,7 @@ public class Client {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, documents, dateOfBirth);
+        return Objects.hash(this.firstName, this.lastName, this.passportId, this.dateOfBirth);
     }
 
     /**
@@ -77,7 +77,7 @@ public class Client {
      * @return the first name of the client
      */
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
 
     /**
@@ -86,17 +86,16 @@ public class Client {
      * @return the last name of the client
      */
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
-
 
     /**
      * Returns the date of birth of the client.
      *
      * @return the date of birth of the client
      */
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public LocalDate getDateOfBirth() {
+        return this.dateOfBirth;
     }
 
     /**
@@ -104,7 +103,7 @@ public class Client {
      *
      * @return {@code true} if the client has provided documents, {@code false} otherwise
      */
-    public boolean getDocuments() {
-        return documents;
+    public String getPassportId() {
+        return this.passportId;
     }
 }

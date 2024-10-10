@@ -1,16 +1,18 @@
 package classesLab;
 
-import java.util.Arrays;
+import classesLab.enums.RoomFeature;
+import classesLab.enums.RoomType;
+import java.util.List;
 
 /**
  * Represents a hotel room with details about room number, type, capacity, features, and reservations.
  */
 public class HotelRoom {
-    private int roomNumber;
-    private String roomType;
-    private int capacity;
-    private String features;
-    private Reservation[] reservations;
+    private final String number;
+    private final RoomType type;
+    private final int capacity;
+    private final List<RoomFeature> features; //Make Enum List of features
+    private List<Reservation> reservations; //Change to list
 
     /**
      * Constructs a new HotelRoom object using the Builder.
@@ -18,8 +20,8 @@ public class HotelRoom {
      * @param builder the Builder object containing the values for the room
      */
     private HotelRoom(Builder builder) {
-        this.roomNumber = builder.roomNumber;
-        this.roomType = builder.roomType;
+        this.number = builder.number;
+        this.type = builder.type;
         this.capacity = builder.capacity;
         this.features = builder.features;
         this.reservations = builder.reservations;
@@ -30,8 +32,8 @@ public class HotelRoom {
      *
      * @return the room number
      */
-    public int getRoomNumber() {
-        return roomNumber;
+    public String getNumber() {
+        return this.number;
     }
 
 
@@ -40,8 +42,8 @@ public class HotelRoom {
      *
      * @return the room type
      */
-    public String getRoomType() {
-        return roomType;
+    public RoomType getType() {
+        return this.type;
     }
 
     /**
@@ -50,7 +52,7 @@ public class HotelRoom {
      * @return the room capacity
      */
     public int getCapacity() {
-        return capacity;
+        return this.capacity;
     }
 
     /**
@@ -58,17 +60,17 @@ public class HotelRoom {
      *
      * @return the room features
      */
-    public String getFeatures() {
-        return features;
+    public List<RoomFeature> getFeatures() {
+        return this.features;
     }
 
     /**
      * Returns the reservations associated with the room.
      *
-     * @return an array of Reservation objects for the room
+     * @return a List of Reservation objects for the room
      */
-    public Reservation[] getReservations() {
-        return reservations;
+    public List<Reservation> getReservations() {
+        return this.reservations;
     }
 
     /**
@@ -76,7 +78,7 @@ public class HotelRoom {
      *
      * @param reservations an array of Reservation objects to be assigned to the room
      */
-    public void setReservations(Reservation[] reservations) {
+    public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
     }
 
@@ -84,31 +86,31 @@ public class HotelRoom {
      * The builder class used to create HotelRoom objects.
      */
     public static class Builder {
-        private int roomNumber;
-        private String roomType;
+        private String number;
+        private RoomType type;
         private int capacity;
-        private String features;
-        private Reservation[] reservations;
+        private List<RoomFeature> features;
+        private List<Reservation> reservations;
 
         /**
          * Sets the room number.
          *
-         * @param roomNumber the room number to be set
+         * @param number the room number to be set
          * @return the Builder object
          */
-        public Builder setRoomNumber(int roomNumber) {
-            this.roomNumber = roomNumber;
+        public Builder setNumber(String number) {
+            this.number = number;
             return this;
         }
 
         /**
          * Sets the room type.
          *
-         * @param roomType the room type to be set
+         * @param type the room type to be set
          * @return the Builder object
          */
-        public Builder setRoomType(String roomType) {
-            this.roomType = roomType;
+        public Builder setType(RoomType type) {
+            this.type = type;
             return this;
         }
 
@@ -129,7 +131,7 @@ public class HotelRoom {
          * @param features the features of the room
          * @return the Builder object
          */
-        public Builder setFeatures(String features) {
+        public Builder setFeatures(List<RoomFeature> features) {
             this.features = features;
             return this;
         }
@@ -140,7 +142,7 @@ public class HotelRoom {
          * @param reservations the array of Reservation objects to be set
          * @return the Builder object
          */
-        public Builder setReservations(Reservation[] reservations) {
+        public Builder setReservations(List<Reservation> reservations) {
             this.reservations = reservations;
             return this;
         }
@@ -163,11 +165,11 @@ public class HotelRoom {
     @Override
     public String toString() {
         return "HotelRoom{" +
-                "roomNumber=" + roomNumber +
-                ", roomType='" + roomType + '\'' +
-                ", capacity=" + capacity +
-                ", features='" + features + '\'' +
-                ", reservations=" + Arrays.toString(reservations) +
+                "roomNumber=" + this.number +
+                ", roomType='" + this.type + '\'' +
+                ", capacity=" + this.capacity +
+                ", features='" + this.features + '\'' +
+                ", reservations=" + this.reservations.toString() +
                 '}';
     }
 
@@ -182,11 +184,7 @@ public class HotelRoom {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         HotelRoom hotelRoom = (HotelRoom) o;
-        return roomNumber == hotelRoom.roomNumber &&
-                capacity == hotelRoom.capacity &&
-                roomType.equals(hotelRoom.roomType) &&
-                features.equals(hotelRoom.features) &&
-                Arrays.equals(reservations, hotelRoom.reservations);
+        return this.number.equals(hotelRoom.number);
     }
 
     /**
@@ -196,11 +194,8 @@ public class HotelRoom {
      */
     @Override
     public int hashCode() {
-        int result = roomType.hashCode();
-        result = 31 * result + roomNumber;
-        result = 31 * result + capacity;
-        result = 31 * result + features.hashCode();
-        result = 31 * result + Arrays.hashCode(reservations);
+        int result = this.type.hashCode();
+        result += this.number.hashCode();
         return result;
     }
 }

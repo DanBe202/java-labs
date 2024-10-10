@@ -1,6 +1,7 @@
 package classesLab;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Represents a hotel consisting of an array of rooms.
@@ -8,14 +9,17 @@ import java.util.Arrays;
  * as well as comparing hotels and generating hotel information.
  */
 public class Hotel {
-    private HotelRoom[] hotelRooms;
+    private final String name;
+    private List<HotelRoom> rooms;
+    private final HotelRoom[] hotelRooms;
 
     /**
      * Constructs a Hotel object with the specified array of hotel rooms.
      *
      * @param hotelRooms an array of {@code HotelRoom} objects representing the rooms in the hotel
      */
-    public Hotel(HotelRoom[] hotelRooms) {
+    public Hotel(String name, HotelRoom[] hotelRooms) {
+        this.name = name;
         this.hotelRooms = hotelRooms;
     }
 
