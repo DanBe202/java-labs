@@ -1,4 +1,4 @@
-package classesLab.enums;
+package lab_1.enums;
 
 public enum RoomType {
     DELUXE,

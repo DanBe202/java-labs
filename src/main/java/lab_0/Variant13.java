@@ -1,4 +1,4 @@
-package javaStatementsLab;
+package lab_0;
 
 import java.util.Arrays;
 

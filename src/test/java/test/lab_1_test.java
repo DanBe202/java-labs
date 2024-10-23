@@ -1,12 +1,12 @@
 package test;
 
-import classesLab.Client;
-import classesLab.Hotel;
-import classesLab.HotelRoom;
-import classesLab.Reservation;
-import classesLab.enums.PaymentStates;
-import classesLab.enums.RoomFeature;
-import classesLab.enums.RoomType;
+import lab_1.Client;
+import lab_1.Hotel;
+import lab_1.HotelRoom;
+import lab_1.Reservation;
+import lab_1.enums.PaymentStates;
+import lab_1.enums.RoomFeature;
+import lab_1.enums.RoomType;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -15,7 +15,7 @@ import org.testng.asserts.SoftAssert;
 import java.time.LocalDate;
 import java.util.Arrays;
 
-public class ReservationSystemTests {
+public class lab_1_test {
 
     private HotelRoom room101;
     private HotelRoom room102;

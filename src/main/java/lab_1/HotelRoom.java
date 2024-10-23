@@ -1,7 +1,7 @@
-package classesLab;
+package lab_1;
 
-import classesLab.enums.RoomFeature;
-import classesLab.enums.RoomType;
+import lab_1.enums.RoomFeature;
+import lab_1.enums.RoomType;
 import java.util.List;
 
 /**

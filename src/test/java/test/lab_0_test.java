@@ -5,9 +5,9 @@ import static org.testng.Assert.assertEquals;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import javaStatementsLab.Variant13;
+import lab_0.Variant13;
 
-public class TestVariant13 {
+public class lab_0_test {
 
     @Test(dataProvider = "integerProvider")
     public void inputTest(int p1, int p3) {

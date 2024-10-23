@@ -1,6 +1,6 @@
-package classesLab;
+package lab_1;
 
-import classesLab.enums.PaymentStates;
+import lab_1.enums.PaymentStates;
 
 import java.time.LocalDate;
 import java.util.Objects;
