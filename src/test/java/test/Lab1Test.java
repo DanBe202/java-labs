@@ -13,9 +13,11 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-public class lab_1_test {
+public class Lab1Test {
 
     private HotelRoom room101;
     private HotelRoom room102;
@@ -46,7 +48,7 @@ public class lab_1_test {
                 .build();
 
         reservation1 = new Reservation(
-                room101,
+                room101.getNumber(),
                 client1,
                 LocalDate.of(2024, 1, 10),
                 LocalDate.of(2024, 1, 15),
@@ -54,7 +56,7 @@ public class lab_1_test {
         );
 
         reservation2 = new Reservation(
-                room102,
+                room102.getNumber(),
                 client2,
                 LocalDate.of(2024, 2, 5),
                 LocalDate.of(2024, 2, 10),
@@ -114,7 +116,7 @@ public class lab_1_test {
     public void testReservationConstructor() {
         SoftAssert sa = new SoftAssert();
 
-        sa.assertEquals(reservation1.getRoomNumber().getNumber(),
+        sa.assertEquals(reservation1.getRoomNumber(),
                 "101",
                 "Reservation should correctly store the room number."
         );
@@ -162,7 +164,10 @@ public class lab_1_test {
 
     @Test
     public void testHotelToString() {
-        Hotel hotel = new Hotel("The grand Blue", new HotelRoom[]{room101, room102});
+        List<HotelRoom> roomList = new ArrayList<>();
+        roomList.add(room101);
+        roomList.add(room102);
+        Hotel hotel = new Hotel("The grand Blue", roomList);
         Assert.assertTrue(hotel.toString().contains("HotelRoom{roomNumber=101"));
         Assert.assertTrue(hotel.toString().contains("HotelRoom{roomNumber=102"));
     }

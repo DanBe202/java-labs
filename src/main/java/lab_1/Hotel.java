@@ -9,18 +9,28 @@ import java.util.List;
  * as well as comparing hotels and generating hotel information.
  */
 public class Hotel {
-    private final String name;
+    private String name;
     private List<HotelRoom> rooms;
-    private final HotelRoom[] hotelRooms;
+
+    public Hotel() {
+    }
 
     /**
      * Constructs a Hotel object with the specified array of hotel rooms.
      *
      * @param hotelRooms an array of {@code HotelRoom} objects representing the rooms in the hotel
      */
-    public Hotel(String name, HotelRoom[] hotelRooms) {
+    public Hotel(String name, List<HotelRoom> hotelRooms) {
         this.name = name;
-        this.hotelRooms = hotelRooms;
+        this.rooms = hotelRooms;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<HotelRoom> getRooms() {
+        return rooms;
     }
 
     /**
@@ -31,7 +41,7 @@ public class Hotel {
     @Override
     public String toString() {
         return "Hotel{" +
-                "hotelRooms=" + Arrays.toString(hotelRooms) +
+                "hotelRooms=" + Arrays.toString(rooms.toArray()) +
                 '}';
     }
 
@@ -46,7 +56,7 @@ public class Hotel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Hotel hotel = (Hotel) o;
-        return Arrays.equals(hotelRooms, hotel.hotelRooms);
+        return Arrays.equals(rooms.toArray(), hotel.rooms.toArray());
     }
 
     /**
@@ -56,6 +66,6 @@ public class Hotel {
      */
     @Override
     public int hashCode() {
-        return Arrays.hashCode(hotelRooms);
+        return Arrays.hashCode(rooms.toArray());
     }
 }

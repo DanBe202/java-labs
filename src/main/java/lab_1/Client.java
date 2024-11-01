@@ -7,11 +7,13 @@ import java.util.Objects;
  * Represents a client with personal details including their name, document status, and date of birth.
  */
 public class Client {
-    private final String firstName;
-    private final String lastName;
-    private final String passportId;
-    private final LocalDate dateOfBirth;
+    private  String firstName;
+    private  String lastName;
+    private  String passportId;
+    private  LocalDate dateOfBirth;
 
+    public Client() {
+    }
     /**
      * Constructs a new Client object with the specified details.
      *

@@ -10,27 +10,30 @@ import java.util.Objects;
  * Includes details about the room number, client, check-in and check-out dates, and payment status.
  */
 public class Reservation {
-    private final HotelRoom room;
-    private final Client client;
-    private final LocalDate enterDate;
-    private final LocalDate departureDate;
-    private final PaymentStates payment;
+    private String roomNumber;
+    private Client client;
+    private LocalDate enterDate;
+    private LocalDate departureDate;
+    private PaymentStates payment;
 
     /**
      * Constructs a new Reservation object with the specified details.
      *
-     * @param room the reserved room
+     * @param roomNumber the reserved room
      * @param client the Client who made the reservation
      * @param enterDate the date when the client will check in
      * @param departureDate the date when the client will check out
      * @param payment indicates whether the reservation has been paid for
      */
-    public Reservation(HotelRoom room, Client client, LocalDate enterDate, LocalDate departureDate, PaymentStates payment) {
-        this.room = room;
+    public Reservation(String roomNumber, Client client, LocalDate enterDate, LocalDate departureDate, PaymentStates payment) {
+        this.roomNumber = roomNumber;
         this.client = client;
         this.enterDate = enterDate;
         this.departureDate = departureDate;
         this.payment = payment;
+    }
+
+    public Reservation() {
     }
 
     /**
@@ -38,8 +41,8 @@ public class Reservation {
      *
      * @return the room number
      */
-    public HotelRoom getRoomNumber() {
-        return this.room;
+    public String getRoomNumber() {
+        return this.roomNumber;
     }
 
     /**
@@ -87,7 +90,7 @@ public class Reservation {
     @Override
     public String toString() {
         return "Reservation{" +
-                "room=" + this.room.getNumber() +
+                "room=" + this.roomNumber +
                 ", client=" + this.client +
                 ", enterDate=" + this.enterDate +
                 ", departureDate=" + this.departureDate +
@@ -108,7 +111,7 @@ public class Reservation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Reservation that = (Reservation) o;
-        return this.room == that.room &&
+        return Objects.equals(this.roomNumber, that.roomNumber) &&
                 this.client.equals(that.client) &&
                 this.enterDate.equals(that.enterDate) &&
                 this.departureDate.equals(that.departureDate) &&
@@ -123,6 +126,6 @@ public class Reservation {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(this.room, this.client, this.enterDate, this.departureDate);
+        return Objects.hash(this.roomNumber, this.client, this.enterDate, this.departureDate);
     }
 }

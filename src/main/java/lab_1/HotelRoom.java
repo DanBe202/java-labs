@@ -2,17 +2,22 @@ package lab_1;
 
 import lab_1.enums.RoomFeature;
 import lab_1.enums.RoomType;
+import lab_4.RoomBuilderValidation;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Represents a hotel room with details about room number, type, capacity, features, and reservations.
  */
-public class HotelRoom {
-    private final String number;
-    private final RoomType type;
-    private final int capacity;
-    private final List<RoomFeature> features; //Make Enum List of features
-    private List<Reservation> reservations; //Change to list
+public class HotelRoom implements Comparable<HotelRoom> {
+    private String number;
+    private RoomType type;
+    private int capacity;
+    private List<RoomFeature> features;
+    private List<Reservation> reservations;
+
+    public HotelRoom() {}
 
     /**
      * Constructs a new HotelRoom object using the Builder.
@@ -99,6 +104,7 @@ public class HotelRoom {
          * @return the Builder object
          */
         public Builder setNumber(String number) {
+            RoomBuilderValidation.validateNumber(number);
             this.number = number;
             return this;
         }
@@ -110,10 +116,10 @@ public class HotelRoom {
          * @return the Builder object
          */
         public Builder setType(RoomType type) {
+            RoomBuilderValidation.validateType(type);
             this.type = type;
             return this;
         }
-
         /**
          * Sets the room capacity.
          *
@@ -121,6 +127,7 @@ public class HotelRoom {
          * @return the Builder object
          */
         public Builder setCapacity(int capacity) {
+            RoomBuilderValidation.validateCapacity(capacity);
             this.capacity = capacity;
             return this;
         }
@@ -132,6 +139,7 @@ public class HotelRoom {
          * @return the Builder object
          */
         public Builder setFeatures(List<RoomFeature> features) {
+            RoomBuilderValidation.validateFeatures(features);
             this.features = features;
             return this;
         }
@@ -153,7 +161,29 @@ public class HotelRoom {
          * @return a new HotelRoom object
          */
         public HotelRoom build() {
+            List<String> errors = validateFields();
+            if (!errors.isEmpty()) {
+                throw new IllegalArgumentException("Invalid field values: " + String.join("; ", errors));
+            }
             return new HotelRoom(this);
+        }
+
+        private List<String> validateFields() {
+            List<String> errors = new ArrayList<>();
+
+            if (number == null || number.isEmpty() || !number.matches("^[A-Z0-9]+$")) {
+                errors.add("Invalid number: '" + number + "'. Must be non-empty and contain only uppercase letters and numbers.");
+            }
+            if (type == null) {
+                errors.add("Room type cannot be null.");
+            }
+            if (capacity <= 0) {
+                errors.add("Invalid capacity: " + capacity + ". Must be greater than zero.");
+            }
+            if (features == null || features.isEmpty()) {
+                errors.add("Room features cannot be null or empty.");
+            }
+            return errors;
         }
     }
 
@@ -164,13 +194,16 @@ public class HotelRoom {
      */
     @Override
     public String toString() {
-        return "HotelRoom{" +
+        String room = "HotelRoom{" +
                 "roomNumber=" + this.number +
                 ", roomType='" + this.type + '\'' +
                 ", capacity=" + this.capacity +
-                ", features='" + this.features + '\'' +
-                ", reservations=" + this.reservations.toString() +
-                '}';
+                ", features='" + this.features;
+        if (this.reservations != null) {
+            room += "'\\'', reservations=" + this.reservations + '}';
+            return room;
+        }
+        return room + '}';
     }
 
     /**
@@ -197,5 +230,10 @@ public class HotelRoom {
         int result = this.type.hashCode();
         result += this.number.hashCode();
         return result;
+    }
+
+    @Override
+    public int compareTo(HotelRoom other) {
+        return this.number.compareTo(other.number);
     }
 }

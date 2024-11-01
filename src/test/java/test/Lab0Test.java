@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import lab_0.Variant13;
 
-public class lab_0_test {
+public class Lab0Test {
 
     @Test(dataProvider = "integerProvider")
     public void inputTest(int p1, int p3) {
