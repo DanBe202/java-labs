@@ -1,4 +1,4 @@
-package lab_1;
+package lab_1_Objects;
 
 import java.time.LocalDate;
 import java.util.Objects;

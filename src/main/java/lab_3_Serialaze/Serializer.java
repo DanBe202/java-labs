@@ -1,4 +1,4 @@
-package lab_3;
+package lab_3_Serialaze;
 
 import java.io.File;
 import java.io.IOException;

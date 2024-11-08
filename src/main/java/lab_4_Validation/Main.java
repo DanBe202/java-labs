@@ -1,10 +1,9 @@
-package lab_4;
+package lab_4_Validation;
 
-import lab_1.HotelRoom;
-import lab_1.enums.RoomFeature;
-import lab_1.enums.RoomType;
+import lab_1_Objects.HotelRoom;
+import lab_1_Objects.enums.RoomFeature;
+import lab_1_Objects.enums.RoomType;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 

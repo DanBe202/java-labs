@@ -1,8 +1,9 @@
-package lab_2;
+package lab_2_Collections;
 
-import lab_1.HotelRoom;
-import lab_1.enums.RoomType;
+import lab_1_Objects.HotelRoom;
+import lab_1_Objects.enums.RoomType;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +16,7 @@ public class HotelService {
 
     public static List<HotelRoom> sortRoomsByCapacity(List<HotelRoom> rooms) {
         return rooms.stream()
-                .sorted(HotelRoomComparators.BY_CAPACITY)
+                .sorted(Comparator.comparingInt(HotelRoom::getCapacity))
                 .collect(Collectors.toList());
     }
 

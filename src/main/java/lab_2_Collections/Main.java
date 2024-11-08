@@ -1,24 +1,28 @@
-package lab_2;
+package lab_2_Collections;
 
-import lab_1.HotelRoom;
-import lab_1.enums.RoomType;
+import lab_1_Objects.HotelRoom;
+import lab_1_Objects.enums.RoomFeature;
+import lab_1_Objects.enums.RoomType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class Lab2Test {
+public class Main {
     public static void main(String[] args) {
         List<HotelRoom> rooms = new ArrayList<>();
 
         rooms.add(new HotelRoom.Builder()
                 .setNumber("101")
                 .setType(RoomType.DELUXE)
+                .setFeatures(Arrays.asList(RoomFeature.MOUNTAIN_VIEW, RoomFeature.QUEEN_BED, RoomFeature.KITCHENETTE))
                 .setCapacity(1)
                 .build());
 
         rooms.add(new HotelRoom.Builder()
                 .setNumber("102")
                 .setType(RoomType.SUITE)
+                .setFeatures(Arrays.asList(RoomFeature.MOUNTAIN_VIEW, RoomFeature.QUEEN_BED, RoomFeature.KITCHENETTE))
                 .setCapacity(2)
                 .build());
 

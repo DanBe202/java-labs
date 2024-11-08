@@ -1,6 +1,6 @@
-package lab_1;
+package lab_1_Objects;
 
-import lab_1.enums.PaymentStates;
+import lab_1_Objects.enums.PaymentStates;
 
 import java.time.LocalDate;
 import java.util.Objects;

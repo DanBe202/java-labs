@@ -1,7 +1,7 @@
-package lab_4;
+package lab_4_Validation;
 
-import lab_1.enums.RoomType;
-import lab_1.enums.RoomFeature;
+import lab_1_Objects.enums.RoomType;
+import lab_1_Objects.enums.RoomFeature;
 import java.util.List;
 
 public class RoomBuilderValidation {

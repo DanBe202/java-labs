@@ -1,12 +1,12 @@
 package test;
 
-import lab_1.Client;
-import lab_1.Hotel;
-import lab_1.HotelRoom;
-import lab_1.Reservation;
-import lab_1.enums.PaymentStates;
-import lab_1.enums.RoomFeature;
-import lab_1.enums.RoomType;
+import lab_1_Objects.Client;
+import lab_1_Objects.Hotel;
+import lab_1_Objects.HotelRoom;
+import lab_1_Objects.Reservation;
+import lab_1_Objects.enums.PaymentStates;
+import lab_1_Objects.enums.RoomFeature;
+import lab_1_Objects.enums.RoomType;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

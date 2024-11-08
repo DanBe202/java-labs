@@ -1,4 +1,4 @@
-package lab_3;
+package lab_3_Serialaze;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;

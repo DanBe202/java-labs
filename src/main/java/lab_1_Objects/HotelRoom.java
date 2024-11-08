@@ -1,8 +1,8 @@
-package lab_1;
+package lab_1_Objects;
 
-import lab_1.enums.RoomFeature;
-import lab_1.enums.RoomType;
-import lab_4.RoomBuilderValidation;
+import lab_1_Objects.enums.RoomFeature;
+import lab_1_Objects.enums.RoomType;
+import lab_4_Validation.RoomBuilderValidation;
 
 import java.util.ArrayList;
 import java.util.List;
