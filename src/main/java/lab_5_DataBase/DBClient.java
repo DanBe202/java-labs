@@ -9,19 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBClient extends DBAbstract<Client> {
-    private static DBClient instance;
+//    private static DBClient instance;
 
-    private DBClient() {}
+    public DBClient() {}
 
-    public static DBClient getInstance() {
-        if (instance == null) {
-            instance = new DBClient();
-        }
-        return instance;
-    }
+//    public static DBClient getInstance() {
+//        if (instance == null) {
+//            instance = new DBClient();
+//        }
+//        return instance;
+//    }
 
     public List<Client> getAll() {
-        try (var connection = DriverManager.getConnection(DBClient.path);
+        try (var connection = getConnection();
              var statement = connection.createStatement();
              var dbClients = statement.executeQuery(
                      "SELECT *" +
@@ -44,17 +44,17 @@ public class DBClient extends DBAbstract<Client> {
     }
 
     public Client getOne(int id) {
-        try (var connection = DriverManager.getConnection(DBClient.path);
+        try (var connection = getConnection();
              var statement = connection.createStatement();
              var dbClient = statement.executeQuery(
                      "SELECT *" +
-                             " FROM сlient" +
-                             " where id = " + id)) {
+                             " FROM client" +
+                             " WHERE id = " + id)) {
             return new Client(
                     dbClient.getInt("id"),
                     dbClient.getString("first_name"),
                     dbClient.getString("last_name"),
-                    dbClient.getString("passportId"),
+                    dbClient.getString("passport_id"),
                     LocalDate.parse(dbClient.getString("date_of_birth"))
             );
 
@@ -64,7 +64,7 @@ public class DBClient extends DBAbstract<Client> {
     }
 
     public void insert(Client client) {
-        try (var connection = DriverManager.getConnection(DBClient.path);
+        try (var connection = getConnection();
              var insert = connection.prepareStatement(
                      "INSERT INTO client(first_name," +
                              " last_name," +
@@ -83,7 +83,7 @@ public class DBClient extends DBAbstract<Client> {
     }
 
     public void update(Client client) {
-        try (var connection = DriverManager.getConnection(DBClient.path);
+        try (var connection = getConnection();
              var update = connection.prepareStatement(
                      "UPDATE client" +
                              " SET first_name = ?," +
@@ -103,7 +103,7 @@ public class DBClient extends DBAbstract<Client> {
     }
 
     public void delete(int id) {
-        try (var conn = DriverManager.getConnection(DBClient.path);
+        try (var conn = getConnection();
              var statement = conn.prepareStatement("DELETE FROM client WHERE id = ?")) {
 
             statement.setInt(1, id);
@@ -115,12 +115,12 @@ public class DBClient extends DBAbstract<Client> {
     }
 
     public static void main(String[] args) throws SQLException {
-        List<Client> clients = DBClient.getInstance().getAll();
+        List<Client> clients = new DBClient().getAll();
 
         Client updatedClient = clients.getLast()
                 .setPassportId("4");
 
-        DBClient.getInstance().update(updatedClient);
+        new DBClient().update(updatedClient);
 
         Client newClient = new Client(
                 clients.getLast().getId(),
@@ -130,7 +130,7 @@ public class DBClient extends DBAbstract<Client> {
                 LocalDate.of(2005, 04, 25)
         );
 
-        DBClient.getInstance().insert(newClient);
+    new DBClient().insert(newClient);
 
         System.out.println(clients);
     }

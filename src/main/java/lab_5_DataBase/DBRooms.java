@@ -10,19 +10,19 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DBRooms extends DBAbstract<HotelRoom> {
-    private static DBRooms instance;
+//    private static DBRooms instance;
 
-    private DBRooms() {}
+    public DBRooms() {}
 
-    public static DBRooms getInstance() {
-        if (instance == null) {
-            instance = new DBRooms();
-        }
-        return instance;
-    }
+//    public static DBRooms getInstance() {
+//        if (instance == null) {
+//            instance = new DBRooms();
+//        }
+//        return instance;
+//    }
 
     public List<HotelRoom> getAll() {
-        try (var connection = DriverManager.getConnection(DBRooms.path);
+        try (var connection = getConnection();
              var statement = connection.createStatement();
              var dbRooms = statement.executeQuery(
                      "SELECT *" +
@@ -45,7 +45,7 @@ public class DBRooms extends DBAbstract<HotelRoom> {
     }
 
     public HotelRoom getOne(int id) {
-        try (var connection = DriverManager.getConnection(DBRooms.path);
+        try (var connection = getConnection();
              var statement = connection.createStatement();
              var dbRoom = statement.executeQuery(
                      "SELECT *" +
@@ -118,25 +118,25 @@ public class DBRooms extends DBAbstract<HotelRoom> {
     }
 
     public static void main(String[] args) throws SQLException {
-        List<HotelRoom> rooms = DBRooms.getInstance().getAll();
+        List<HotelRoom> rooms = new DBRooms().getAll();
+//
+//        HotelRoom updatedRoom = rooms.getLast()
+//                .setCapacity(5);
+//
+//        DBRooms.getInstance().update(updatedRoom);
+//
+//        HotelRoom room105 = new HotelRoom.Builder()
+//                .setId(rooms.getLast().getId())
+//                .setNumber("106")
+//                .setType(RoomType.SUITE)
+//                .setCapacity(2)
+//                .setHotelId(1)
+//                .setFeatures(Arrays.asList(RoomFeature.MINI_BAR))
+//                .setReservations(List.of())
+//                .build();
+//
+//        DBRooms.getInstance().insert(room105);
 
-        HotelRoom updatedRoom = rooms.getLast()
-                .setCapacity(5);
-
-        DBRooms.getInstance().update(updatedRoom);
-
-        HotelRoom room105 = new HotelRoom.Builder()
-                .setId(rooms.getLast().getId())
-                .setNumber("106")
-                .setType(RoomType.SUITE)
-                .setCapacity(2)
-                .setHotelId(1)
-                .setFeatures(Arrays.asList(RoomFeature.MINI_BAR))
-                .setReservations(List.of())
-                .build();
-
-        DBRooms.getInstance().insert(room105);
-
-        System.out.println(DBRooms.getInstance().getAll());
+        System.out.println(new DBRooms().getAll());
     }
 }
