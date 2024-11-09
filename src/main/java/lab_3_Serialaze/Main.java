@@ -19,10 +19,11 @@ public class Main {
 
     public static void  main(String[] args) throws IOException {
 
-        Client client1 = new Client(1, "John", "Doe", "1", LocalDate.of(1995, 5, 15));
-        Client client2 = new Client(2, "Jane", "Smith", "2", LocalDate.of(1990, 10, 20));
+        Client client1 = new Client(1, "John", "Doe", "1", LocalDate.of(2020, 5, 15));
+        Client client2 = new Client(2, "Jane", "Smith", "2", LocalDate.of(2024, 10, 20));
 
         HotelRoom room101 = new HotelRoom.Builder()
+                .setId(1)
                 .setNumber("101")
                 .setType(RoomType.DELUXE)
                 .setCapacity(2)
@@ -32,6 +33,7 @@ public class Main {
                 .build();
 
         HotelRoom room102 = new HotelRoom.Builder()
+                .setId(2)
                 .setNumber("102")
                 .setType(RoomType.SUITE)
                 .setCapacity(4)
@@ -67,33 +69,33 @@ public class Main {
 
         Hotel hotel = new Hotel(1, "The grand blue", roomList);
 
-        // JSON
-        Serializer<Hotel> jsonSerializer = new JsonSerializer<>();
-        String jsonData = jsonSerializer.serialize(hotel);
-        System.out.println("JSON: " + jsonData);
-
-        Hotel deserializedHotel = jsonSerializer.deserialize(jsonData, Hotel.class);
-        System.out.println("Deserialized:" + deserializedHotel);
-
-        jsonSerializer.writeToFile(hotel, new File("hotel.json"));
-        Hotel hotelFromJson = jsonSerializer.readFromFile(new File("hotel.json"), Hotel.class);
-        System.out.println("Deserialized from JSON: " + hotelFromJson);
+//        // JSON
+//        Serializer<Hotel> jsonSerializer = new JsonSerializer<>();
+//        String jsonData = jsonSerializer.serialize(hotel);
+//        System.out.println("JSON: " + jsonData);
+//
+//        Hotel deserializedHotel = jsonSerializer.deserialize(jsonData, Hotel.class);
+//        System.out.println("Deserialized:" + deserializedHotel);
+//
+//        jsonSerializer.writeToFile(hotel, new File("hotel.json"));
+//        Hotel hotelFromJson = jsonSerializer.readFromFile(new File("hotel.json"), Hotel.class);
+//        System.out.println("Deserialized from JSON: " + hotelFromJson);
 
         // XML
-        Serializer<Hotel> xmlSerializer = new XmlSerializer<>();
-        String xmlData = xmlSerializer.serialize(hotel);
-        System.out.println("XML: " + xmlData);
-
-        xmlSerializer.writeToFile(hotel, new File("hotel.xml"));
-        Hotel hotelFromXml = xmlSerializer.readFromFile(new File("hotel.xml"), Hotel.class);
-        System.out.println("Deserialized from XML: " + hotelFromXml);
-
-        // YAML
+//        Serializer<Hotel> xmlSerializer = new XmlSerializer<>();
+//        String xmlData = xmlSerializer.serialize(hotel);
+//        System.out.println("XML: " + xmlData);
+//
+//        xmlSerializer.writeToFile(hotel, new File("hotel.xml"));
+//        Hotel hotelFromXml = xmlSerializer.readFromFile(new File("hotel.xml"), Hotel.class);
+//        System.out.println("Deserialized from XML: " + hotelFromXml);
+//
+//        // YAML
         Serializer<Hotel> yamlSerializer = new YamlSerializer<>();
-        String yamlData = yamlSerializer.serialize(hotel);
-        System.out.println("YAML: " + yamlData);
-
-        yamlSerializer.writeToFile(hotel, new File("hotel.yaml"));
+//        String yamlData = yamlSerializer.serialize(hotel);
+//        System.out.println("YAML: " + yamlData);
+//
+//        yamlSerializer.writeToFile(hotel, new File("hotel.yaml"));
         Hotel hotelFromYaml = yamlSerializer.readFromFile(new File("hotel.yaml"), Hotel.class);
         System.out.println("Deserialized from YAML: " + hotelFromYaml);
     }

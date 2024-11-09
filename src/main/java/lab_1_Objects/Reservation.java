@@ -1,6 +1,7 @@
 package lab_1_Objects;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lab_1_Objects.enums.PaymentStates;
 
 import java.time.LocalDate;
@@ -12,11 +13,14 @@ import java.util.Objects;
  */
 public class Reservation {
     private int id;
+    @JsonIgnore
     private HotelRoom room;
     private Client client;
     @JsonFormat
             (shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate enterDate;
+    @JsonFormat
+            (shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate departureDate;
     private PaymentStates payment;
 
@@ -135,7 +139,7 @@ public class Reservation {
     @Override
     public String toString() {
         return "Reservation{" +
-                "room=" + this.room.getNumber() +
+                "room=" + this.room +
                 ", client=" + this.client +
                 ", enterDate=" + this.enterDate +
                 ", departureDate=" + this.departureDate +

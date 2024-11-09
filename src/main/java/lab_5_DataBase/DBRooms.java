@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class DBRooms extends DBCrud<HotelRoom>{
+public class DBRooms extends DBAbstract<HotelRoom> {
     private static DBRooms instance;
 
     private DBRooms() {}

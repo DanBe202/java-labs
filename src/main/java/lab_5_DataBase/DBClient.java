@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBClient extends DBCrud<Client> {
+public class DBClient extends DBAbstract<Client> {
     private static DBClient instance;
 
     private DBClient() {}

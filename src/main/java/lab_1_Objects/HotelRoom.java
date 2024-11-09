@@ -1,5 +1,6 @@
 package lab_1_Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lab_1_Objects.enums.RoomFeature;
 import lab_1_Objects.enums.RoomType;
 
@@ -73,6 +74,7 @@ public class HotelRoom implements Comparable<HotelRoom> {
         return this.type;
     }
 
+    @JsonIgnore
     public String getTypeString() {
         return this.type.toString();
     }
@@ -100,6 +102,7 @@ public class HotelRoom implements Comparable<HotelRoom> {
         return this.features;
     }
 
+    @JsonIgnore
     public String getFeaturesString() {
         return this.features.toString().replace("[", "").replace("]", "");
     }

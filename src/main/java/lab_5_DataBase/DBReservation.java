@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBReservation extends DBCrud<Reservation> {
+public class DBReservation extends DBAbstract<Reservation> {
     private static DBReservation instance;
 
     private DBReservation() {}
