@@ -20,7 +20,7 @@ public class Main {
         HotelRoom room102 = new HotelRoom.Builder()
                 .setNumber("A10-2")
                 .setType(RoomType.SUITE)
-                .setCapacity(4)
+                .setCapacity(-3)
                 .setFeatures(Arrays.asList(RoomFeature.MOUNTAIN_VIEW, RoomFeature.QUEEN_BED, RoomFeature.KITCHENETTE))
                 .setReservations(List.of())
                 .build();

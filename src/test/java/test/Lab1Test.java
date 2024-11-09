@@ -28,27 +28,32 @@ public class Lab1Test {
 
     @BeforeMethod
     public void setUp() {
-        client1 = new Client("John", "Doe", "1", LocalDate.of(1985, 5, 15));
-        client2 = new Client("Jane", "Smith", "2", LocalDate.of(1990, 10, 20));
+        client1 = new Client(1, "John", "Doe", "1", LocalDate.of(1985, 5, 15));
+        client2 = new Client(2, "Jane", "Smith", "2", LocalDate.of(1990, 10, 20));
 
         room101 = new HotelRoom.Builder()
+                .setId(1)
                 .setNumber("101")
                 .setType(RoomType.DELUXE)
                 .setCapacity(2)
+                .setHotelId(1)
                 .setFeatures(Arrays.asList(RoomFeature.OCEAN_VIEW, RoomFeature.KING_BED, RoomFeature.MINI_BAR))
                 .setReservations(Arrays.asList(reservation2))
                 .build();
 
         room102 = new HotelRoom.Builder()
+                .setId(2)
                 .setNumber("102")
                 .setType(RoomType.SUITE)
                 .setCapacity(4)
+                .setHotelId(1)
                 .setFeatures(Arrays.asList(RoomFeature.MOUNTAIN_VIEW, RoomFeature.QUEEN_BED, RoomFeature.KITCHENETTE))
                 .setReservations(Arrays.asList(reservation2))
                 .build();
 
         reservation1 = new Reservation(
-                room101.getNumber(),
+                1,
+                room101,
                 client1,
                 LocalDate.of(2024, 1, 10),
                 LocalDate.of(2024, 1, 15),
@@ -56,7 +61,8 @@ public class Lab1Test {
         );
 
         reservation2 = new Reservation(
-                room102.getNumber(),
+                2,
+                room102,
                 client2,
                 LocalDate.of(2024, 2, 5),
                 LocalDate.of(2024, 2, 10),
@@ -116,7 +122,7 @@ public class Lab1Test {
     public void testReservationConstructor() {
         SoftAssert sa = new SoftAssert();
 
-        sa.assertEquals(reservation1.getRoomNumber(),
+        sa.assertEquals(reservation1.getRoom().getNumber(),
                 "101",
                 "Reservation should correctly store the room number."
         );
@@ -152,7 +158,7 @@ public class Lab1Test {
     @Test
     public void testClientEquality() {
         Assert.assertNotEquals(client1, client2, "Client 1 should not equal Client 2");
-        Client sameAsClient1 = new Client("John", "Doe", "1", LocalDate.of(1985, 5, 15));
+        Client sameAsClient1 = new Client(1, "John", "Doe", "1", LocalDate.of(1985, 5, 15));
         Assert.assertEquals(client1, sameAsClient1, "Clients with the same details should be equal");
     }
 
@@ -167,9 +173,9 @@ public class Lab1Test {
         List<HotelRoom> roomList = new ArrayList<>();
         roomList.add(room101);
         roomList.add(room102);
-        Hotel hotel = new Hotel("The grand Blue", roomList);
-        Assert.assertTrue(hotel.toString().contains("HotelRoom{roomNumber=101"));
-        Assert.assertTrue(hotel.toString().contains("HotelRoom{roomNumber=102"));
+        Hotel hotel = new Hotel(1, "The grand Blue", roomList);
+        Assert.assertTrue(hotel.toString().contains("HotelRoom{id=1, roomNumber=101"));
+        Assert.assertTrue(hotel.toString().contains("Reservation{room=102"));
     }
 
     @Test

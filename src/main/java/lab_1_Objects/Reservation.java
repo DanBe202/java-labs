@@ -1,5 +1,6 @@
 package lab_1_Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lab_1_Objects.enums.PaymentStates;
 
 import java.time.LocalDate;
@@ -10,8 +11,11 @@ import java.util.Objects;
  * Includes details about the room number, client, check-in and check-out dates, and payment status.
  */
 public class Reservation {
-    private String roomNumber;
+    private int id;
+    private HotelRoom room;
     private Client client;
+    @JsonFormat
+            (shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate enterDate;
     private LocalDate departureDate;
     private PaymentStates payment;
@@ -19,14 +23,21 @@ public class Reservation {
     /**
      * Constructs a new Reservation object with the specified details.
      *
-     * @param roomNumber the reserved room
+     * @param room the reserved room
      * @param client the Client who made the reservation
      * @param enterDate the date when the client will check in
      * @param departureDate the date when the client will check out
      * @param payment indicates whether the reservation has been paid for
      */
-    public Reservation(String roomNumber, Client client, LocalDate enterDate, LocalDate departureDate, PaymentStates payment) {
-        this.roomNumber = roomNumber;
+    public Reservation(
+            int id, 
+            HotelRoom room,
+            Client client,
+            LocalDate enterDate,
+            LocalDate departureDate,
+            PaymentStates payment) {
+        this.id = id;
+        this.room = room;
         this.client = client;
         this.enterDate = enterDate;
         this.departureDate = departureDate;
@@ -36,13 +47,27 @@ public class Reservation {
     public Reservation() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public Reservation setId(int id) {
+        this.id = id;
+        return this;
+    }
+
     /**
      * Returns the number of the room reserved.
      *
      * @return the room number
      */
-    public String getRoomNumber() {
-        return this.roomNumber;
+    public HotelRoom getRoom() {
+        return this.room;
+    }
+
+    public Reservation setRoom(HotelRoom room) {
+        this.room = room;
+        return this;
     }
 
     /**
@@ -54,6 +79,11 @@ public class Reservation {
         return this.client;
     }
 
+    public Reservation setClient(Client client) {
+        this.client = client;
+        return this;
+    }
+
     /**
      * Returns the check-in date for the reservation.
      *
@@ -61,6 +91,11 @@ public class Reservation {
      */
     public LocalDate getEnterDate() {
         return this.enterDate;
+    }
+
+    public Reservation setEnterDate(LocalDate enterDate) {
+        this.enterDate = enterDate;
+        return this;
     }
 
     /**
@@ -72,6 +107,11 @@ public class Reservation {
         return this.departureDate;
     }
 
+    public Reservation setDepartureDate(LocalDate departureDate) {
+        this.departureDate = departureDate;
+        return this;
+    }
+
     /**
      * Returns whether the reservation has been paid for.
      *
@@ -79,6 +119,11 @@ public class Reservation {
      */
     public PaymentStates getPayment() {
         return this.payment;
+    }
+
+    public Reservation setPayment(PaymentStates payment) {
+        this.payment = payment;
+        return this;
     }
 
     /**
@@ -90,7 +135,7 @@ public class Reservation {
     @Override
     public String toString() {
         return "Reservation{" +
-                "room=" + this.roomNumber +
+                "room=" + this.room.getNumber() +
                 ", client=" + this.client +
                 ", enterDate=" + this.enterDate +
                 ", departureDate=" + this.departureDate +
@@ -111,7 +156,7 @@ public class Reservation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Reservation that = (Reservation) o;
-        return Objects.equals(this.roomNumber, that.roomNumber) &&
+        return Objects.equals(this.room, that.room) &&
                 this.client.equals(that.client) &&
                 this.enterDate.equals(that.enterDate) &&
                 this.departureDate.equals(that.departureDate) &&
@@ -126,6 +171,6 @@ public class Reservation {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(this.roomNumber, this.client, this.enterDate, this.departureDate);
+        return Objects.hash(this.room.getNumber(), this.client, this.enterDate, this.departureDate);
     }
 }

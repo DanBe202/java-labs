@@ -6,5 +6,14 @@ public enum RoomFeature {
     MINI_BAR,
     MOUNTAIN_VIEW,
     QUEEN_BED,
-    KITCHENETTE
+    KITCHENETTE;
+
+    public static RoomFeature fromString(String value) {
+        try {
+            return RoomFeature.valueOf(value.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.err.println("No constant with text " + value + " found in RoomFeature");
+            return null;
+        }
+    }
 }

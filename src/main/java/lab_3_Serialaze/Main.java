@@ -19,13 +19,14 @@ public class Main {
 
     public static void  main(String[] args) throws IOException {
 
-        Client client1 = new Client("John", "Doe", "1", LocalDate.of(1995, 5, 15));
-        Client client2 = new Client("Jane", "Smith", "2", LocalDate.of(1990, 10, 20));
+        Client client1 = new Client(1, "John", "Doe", "1", LocalDate.of(1995, 5, 15));
+        Client client2 = new Client(2, "Jane", "Smith", "2", LocalDate.of(1990, 10, 20));
 
         HotelRoom room101 = new HotelRoom.Builder()
                 .setNumber("101")
                 .setType(RoomType.DELUXE)
                 .setCapacity(2)
+                .setHotelId(1)
                 .setFeatures(Arrays.asList(RoomFeature.OCEAN_VIEW, RoomFeature.KING_BED, RoomFeature.MINI_BAR))
                 .setReservations(List.of())
                 .build();
@@ -34,12 +35,14 @@ public class Main {
                 .setNumber("102")
                 .setType(RoomType.SUITE)
                 .setCapacity(4)
+                .setHotelId(1)
                 .setFeatures(Arrays.asList(RoomFeature.MOUNTAIN_VIEW, RoomFeature.QUEEN_BED, RoomFeature.KITCHENETTE))
                 .setReservations(List.of())
                 .build();
 
         Reservation reservation1 = new Reservation(
-                room101.getNumber(),
+                1,
+                room101,
                 client1,
                 LocalDate.of(2024, 1, 10),
                 LocalDate.of(2024, 1, 15),
@@ -47,7 +50,8 @@ public class Main {
         );
 
         Reservation reservation2 = new Reservation(
-                room102.getNumber(),
+                2,
+                room102,
                 client2,
                 LocalDate.of(2024, 2, 5),
                 LocalDate.of(2024, 2, 10),
@@ -61,12 +65,15 @@ public class Main {
         roomList.add(room101);
         roomList.add(room102);
 
-        Hotel hotel = new Hotel("The grand blue", roomList);
+        Hotel hotel = new Hotel(1, "The grand blue", roomList);
 
         // JSON
         Serializer<Hotel> jsonSerializer = new JsonSerializer<>();
         String jsonData = jsonSerializer.serialize(hotel);
         System.out.println("JSON: " + jsonData);
+
+        Hotel deserializedHotel = jsonSerializer.deserialize(jsonData, Hotel.class);
+        System.out.println("Deserialized:" + deserializedHotel);
 
         jsonSerializer.writeToFile(hotel, new File("hotel.json"));
         Hotel hotelFromJson = jsonSerializer.readFromFile(new File("hotel.json"), Hotel.class);

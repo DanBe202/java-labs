@@ -1,5 +1,7 @@
 package lab_1_Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -7,26 +9,101 @@ import java.util.Objects;
  * Represents a client with personal details including their name, document status, and date of birth.
  */
 public class Client {
-    private  String firstName;
-    private  String lastName;
-    private  String passportId;
-    private  LocalDate dateOfBirth;
+    private int id;
+    private String firstName;
+    private String lastName;
+    private String passportId;
+    @JsonFormat
+            (shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate dateOfBirth;
 
     public Client() {
     }
+
     /**
      * Constructs a new Client object with the specified details.
      *
-     * @param firstName the first name of the client
-     * @param lastName the last name of the client
-     * @param passportId the document status of the client (e.g., whether documents are provided)
+     * @param firstName   the first name of the client
+     * @param lastName    the last name of the client
+     * @param passportId  the document status of the client (e.g., whether documents are provided)
      * @param dateOfBirth the date of birth of the client
      */
-    public Client(String firstName, String lastName, String passportId, LocalDate dateOfBirth) {
+    public Client(int id, 
+                  String firstName,
+                  String lastName,
+                  String passportId,
+                  LocalDate dateOfBirth) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.passportId = passportId;
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public Client setId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    /**
+     * Returns the first name of the client.
+     *
+     * @return the first name of the client
+     */
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public Client setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+
+    /**
+     * Returns the last name of the client.
+     *
+     * @return the last name of the client
+     */
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public Client setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    /**
+     * Returns the date of birth of the client.
+     *
+     * @return the date of birth of the client
+     */
+    public LocalDate getDateOfBirth() {
+        return this.dateOfBirth;
+    }
+
+    public Client setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+        return this;
+    }
+
+    /**
+     * Returns the document status of the client.
+     *
+     * @return {@code true} if the client has provided documents, {@code false} otherwise
+     */
+    public String getPassportId() {
+        return this.passportId;
+    }
+
+    public Client setPassportId(String passportId) {
+        this.passportId = passportId;
+        return this;
     }
 
     /**
@@ -71,41 +148,5 @@ public class Client {
     @Override
     public int hashCode() {
         return Objects.hash(this.firstName, this.lastName, this.passportId, this.dateOfBirth);
-    }
-
-    /**
-     * Returns the first name of the client.
-     *
-     * @return the first name of the client
-     */
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    /**
-     * Returns the last name of the client.
-     *
-     * @return the last name of the client
-     */
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    /**
-     * Returns the date of birth of the client.
-     *
-     * @return the date of birth of the client
-     */
-    public LocalDate getDateOfBirth() {
-        return this.dateOfBirth;
-    }
-
-    /**
-     * Returns the document status of the client.
-     *
-     * @return {@code true} if the client has provided documents, {@code false} otherwise
-     */
-    public String getPassportId() {
-        return this.passportId;
     }
 }

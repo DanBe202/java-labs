@@ -9,6 +9,7 @@ import java.util.List;
  * as well as comparing hotels and generating hotel information.
  */
 public class Hotel {
+    private int id;
     private String name;
     private List<HotelRoom> rooms;
 
@@ -20,17 +21,22 @@ public class Hotel {
      *
      * @param hotelRooms an array of {@code HotelRoom} objects representing the rooms in the hotel
      */
-    public Hotel(String name, List<HotelRoom> hotelRooms) {
+    public Hotel(int id, String name, List<HotelRoom> hotelRooms) {
+        this.id = id;
         this.name = name;
         this.rooms = hotelRooms;
     }
 
+    public int getId() {
+        return this.id;
+    }
+
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public List<HotelRoom> getRooms() {
-        return rooms;
+        return this.rooms;
     }
 
     /**
@@ -54,9 +60,9 @@ public class Hotel {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || this.getClass() != o.getClass()) return false;
         Hotel hotel = (Hotel) o;
-        return Arrays.equals(rooms.toArray(), hotel.rooms.toArray());
+        return Arrays.equals(this.rooms.toArray(), hotel.rooms.toArray());
     }
 
     /**
@@ -66,6 +72,6 @@ public class Hotel {
      */
     @Override
     public int hashCode() {
-        return Arrays.hashCode(rooms.toArray());
+        return Arrays.hashCode(this.rooms.toArray());
     }
 }

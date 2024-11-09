@@ -2,18 +2,21 @@ package lab_1_Objects;
 
 import lab_1_Objects.enums.RoomFeature;
 import lab_1_Objects.enums.RoomType;
-import lab_4_Validation.RoomBuilderValidation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a hotel room with details about room number, type, capacity, features, and reservations.
  */
 public class HotelRoom implements Comparable<HotelRoom> {
+    private int id;
     private String number;
     private RoomType type;
     private int capacity;
+    private int hotelId;
     private List<RoomFeature> features;
     private List<Reservation> reservations;
 
@@ -25,11 +28,17 @@ public class HotelRoom implements Comparable<HotelRoom> {
      * @param builder the Builder object containing the values for the room
      */
     private HotelRoom(Builder builder) {
+        this.id = builder.id;
         this.number = builder.number;
         this.type = builder.type;
         this.capacity = builder.capacity;
         this.features = builder.features;
+        this.hotelId = builder.hotelId;
         this.reservations = builder.reservations;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     /**
@@ -41,6 +50,19 @@ public class HotelRoom implements Comparable<HotelRoom> {
         return this.number;
     }
 
+    public HotelRoom setNumber(String number) {
+        this.number = number;
+        return this;
+    }
+
+    public int getHotelId() {
+        return hotelId;
+    }
+
+    public HotelRoom setHotelId(int hotelId) {
+        this.hotelId = hotelId;
+        return this;
+    }
 
     /**
      * Returns the room type.
@@ -49,6 +71,10 @@ public class HotelRoom implements Comparable<HotelRoom> {
      */
     public RoomType getType() {
         return this.type;
+    }
+
+    public String getTypeString() {
+        return this.type.toString();
     }
 
     /**
@@ -60,6 +86,11 @@ public class HotelRoom implements Comparable<HotelRoom> {
         return this.capacity;
     }
 
+    public HotelRoom setCapacity(int capacity) {
+        this.capacity = capacity;
+        return this;
+    }
+
     /**
      * Returns the room's features (e.g., sea view, balcony, air conditioning).
      *
@@ -67,6 +98,10 @@ public class HotelRoom implements Comparable<HotelRoom> {
      */
     public List<RoomFeature> getFeatures() {
         return this.features;
+    }
+
+    public String getFeaturesString() {
+        return this.features.toString().replace("[", "").replace("]", "");
     }
 
     /**
@@ -91,20 +126,26 @@ public class HotelRoom implements Comparable<HotelRoom> {
      * The builder class used to create HotelRoom objects.
      */
     public static class Builder {
+        private int id;
         private String number;
         private RoomType type;
         private int capacity;
+        private int hotelId;
         private List<RoomFeature> features;
         private List<Reservation> reservations;
 
         /**
-         * Sets the room number.
+         * Sets the room id.
          *
-         * @param number the room number to be set
+         * @param id the room id to be set
          * @return the Builder object
          */
+        public Builder setId(int id) {
+            this.id = id;
+            return this;
+        }
+
         public Builder setNumber(String number) {
-            RoomBuilderValidation.validateNumber(number);
             this.number = number;
             return this;
         }
@@ -116,7 +157,6 @@ public class HotelRoom implements Comparable<HotelRoom> {
          * @return the Builder object
          */
         public Builder setType(RoomType type) {
-            RoomBuilderValidation.validateType(type);
             this.type = type;
             return this;
         }
@@ -127,8 +167,37 @@ public class HotelRoom implements Comparable<HotelRoom> {
          * @return the Builder object
          */
         public Builder setCapacity(int capacity) {
-            RoomBuilderValidation.validateCapacity(capacity);
             this.capacity = capacity;
+            return this;
+        }
+
+
+        /**
+         * Sets the room capacity.
+         *
+         * @param hotelId the id of the hotel
+         * @return the Builder object
+         */
+        public Builder setHotelId(int hotelId) {
+            this.hotelId = hotelId;
+            return this;
+        }
+
+        /**
+         * Sets the room features.
+         *
+         * @param featuresString the features of the room in String form
+         * @return the Builder object
+         */
+        public Builder setFeatures(String featuresString) {
+            if (featuresString != null && !featuresString.isEmpty()) {
+                this.features = Arrays.stream(featuresString.split("\\s*,\\s*"))
+                        .filter(feature -> feature != null && !feature.isEmpty())
+                        .map(RoomFeature::fromString)
+                        .collect(Collectors.toList());
+            } else {
+                this.features = List.of();
+            }
             return this;
         }
 
@@ -139,7 +208,6 @@ public class HotelRoom implements Comparable<HotelRoom> {
          * @return the Builder object
          */
         public Builder setFeatures(List<RoomFeature> features) {
-            RoomBuilderValidation.validateFeatures(features);
             this.features = features;
             return this;
         }
@@ -171,6 +239,9 @@ public class HotelRoom implements Comparable<HotelRoom> {
         private List<String> validateFields() {
             List<String> errors = new ArrayList<>();
 
+            if (id <= 0) {
+                errors.add("Invalid number: '" + number + "'. Must be non-empty and contain only uppercase letters and numbers.");
+            }
             if (number == null || number.isEmpty() || !number.matches("^[A-Z0-9]+$")) {
                 errors.add("Invalid number: '" + number + "'. Must be non-empty and contain only uppercase letters and numbers.");
             }
@@ -195,7 +266,8 @@ public class HotelRoom implements Comparable<HotelRoom> {
     @Override
     public String toString() {
         String room = "HotelRoom{" +
-                "roomNumber=" + this.number +
+                "id=" + this.id +
+                ", roomNumber=" + this.number +
                 ", roomType='" + this.type + '\'' +
                 ", capacity=" + this.capacity +
                 ", features='" + this.features;

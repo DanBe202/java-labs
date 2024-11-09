@@ -17,6 +17,7 @@ public class Main {
                 .setType(RoomType.DELUXE)
                 .setFeatures(Arrays.asList(RoomFeature.MOUNTAIN_VIEW, RoomFeature.QUEEN_BED, RoomFeature.KITCHENETTE))
                 .setCapacity(1)
+                .setHotelId(1)
                 .build());
 
         rooms.add(new HotelRoom.Builder()
@@ -24,15 +25,18 @@ public class Main {
                 .setType(RoomType.SUITE)
                 .setFeatures(Arrays.asList(RoomFeature.MOUNTAIN_VIEW, RoomFeature.QUEEN_BED, RoomFeature.KITCHENETTE))
                 .setCapacity(2)
+                .setHotelId(1)
                 .build());
 
-        List<HotelRoom> suites = HotelService.filterRoomsByType(rooms, RoomType.SUITE);
+        HotelRoomService service = new HotelRoomService(rooms);
+
+        List<HotelRoom> suites = service.filterRoomsByType(RoomType.SUITE);
         System.out.println("Suites: " + suites.get(0).toString());
 
-        List<HotelRoom> sortedByCapacity = HotelService.sortRoomsByCapacity(rooms);
+        List<HotelRoom> sortedByCapacity = service.sortRoomsByCapacity();
         System.out.println("Rooms sorted by capacity: " + sortedByCapacity);
 
-        List<HotelRoom> highCapacityRooms = HotelService.findRoomsAboveCapacity(rooms, 1);
+        List<HotelRoom> highCapacityRooms = service.findRoomsAboveCapacity( 1);
         System.out.println("Rooms with capacity above 1: " + highCapacityRooms);
     }
 }
