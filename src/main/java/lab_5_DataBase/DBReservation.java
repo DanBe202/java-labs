@@ -3,28 +3,19 @@ package lab_5_DataBase;
 import lab_1_Objects.Reservation;
 import lab_1_Objects.enums.PaymentStates;
 
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBReservation extends DBAbstract<Reservation> {
-//    private static DBReservation instance;
-    private DBRooms roomsDB;
-    private DBClient clientDB;
+    private final DBRoom roomsDB;
+    private final DBClient clientDB;
 
     public DBReservation() {
-        roomsDB = new DBRooms();
+        roomsDB = new DBRoom();
         clientDB = new DBClient();
     }
-
-//    public static DBReservation getInstance() {
-//        if (instance == null) {
-//            instance = new DBReservation();
-//        }
-//        return instance;
-//    }
 
     public List<Reservation> getAll() {
         try (var connection = getConnection();
@@ -59,7 +50,7 @@ public class DBReservation extends DBAbstract<Reservation> {
                              " WHERE id = " + id)) {
             return new Reservation(
                     dbReservation.getInt("id"),
-                    new DBRooms().getOne(dbReservation.getInt("room_id")),
+                    new DBRoom().getOne(dbReservation.getInt("room_id")),
                     new DBClient().getOne(dbReservation.getInt("client")),
                     LocalDate.parse(dbReservation.getString("enter_date")),
                     LocalDate.parse(dbReservation.getString("departure_date")),

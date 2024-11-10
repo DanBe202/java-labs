@@ -2,23 +2,14 @@ package lab_5_DataBase;
 
 import lab_1_Objects.Client;
 
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBClient extends DBAbstract<Client> {
-//    private static DBClient instance;
 
     public DBClient() {}
-
-//    public static DBClient getInstance() {
-//        if (instance == null) {
-//            instance = new DBClient();
-//        }
-//        return instance;
-//    }
 
     public List<Client> getAll() {
         try (var connection = getConnection();

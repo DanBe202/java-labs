@@ -1,25 +1,15 @@
 package lab_5_DataBase;
 
 import lab_1_Objects.HotelRoom;
-import lab_1_Objects.enums.RoomFeature;
 import lab_1_Objects.enums.RoomType;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class DBRooms extends DBAbstract<HotelRoom> {
-//    private static DBRooms instance;
+public class DBRoom extends DBAbstract<HotelRoom> {
 
-    public DBRooms() {}
-
-//    public static DBRooms getInstance() {
-//        if (instance == null) {
-//            instance = new DBRooms();
-//        }
-//        return instance;
-//    }
+    public DBRoom() {}
 
     public List<HotelRoom> getAll() {
         try (var connection = getConnection();
@@ -50,7 +40,7 @@ public class DBRooms extends DBAbstract<HotelRoom> {
              var dbRoom = statement.executeQuery(
                      "SELECT *" +
                              " FROM room" +
-                             " where id = " + id)) {
+                             " WHERE id = " + id)) {
             return new HotelRoom.Builder()
                     .setId(dbRoom.getInt("id"))
                     .setHotelId(dbRoom.getInt("hotel_id"))
@@ -65,7 +55,7 @@ public class DBRooms extends DBAbstract<HotelRoom> {
     }
 
     public void insert(HotelRoom room) {
-        try (var connection = DriverManager.getConnection(DBRooms.path);
+        try (var connection = DriverManager.getConnection(DBRoom.path);
              var insert = connection.prepareStatement(
                      "INSERT INTO room(hotel_id," +
                              " number," +
@@ -86,7 +76,7 @@ public class DBRooms extends DBAbstract<HotelRoom> {
     }
 
     public void update(HotelRoom room) {
-        try (var connection = DriverManager.getConnection(DBRooms.path);
+        try (var connection = DriverManager.getConnection(DBRoom.path);
              var update = connection.prepareStatement(
                      "UPDATE room " +
                              "SET number = ?," +
@@ -106,7 +96,7 @@ public class DBRooms extends DBAbstract<HotelRoom> {
     }
 
     public void delete(int id) {
-        try (var conn = DriverManager.getConnection(DBRooms.path);
+        try (var conn = DriverManager.getConnection(DBRoom.path);
              var statement = conn.prepareStatement("DELETE FROM room WHERE id = ?")) {
 
             statement.setInt(1, id);
@@ -118,7 +108,7 @@ public class DBRooms extends DBAbstract<HotelRoom> {
     }
 
     public static void main(String[] args) throws SQLException {
-        List<HotelRoom> rooms = new DBRooms().getAll();
+//        List<HotelRoom> rooms = new DBRoom().getAll();
 //
 //        HotelRoom updatedRoom = rooms.getLast()
 //                .setCapacity(5);
@@ -137,6 +127,6 @@ public class DBRooms extends DBAbstract<HotelRoom> {
 //
 //        DBRooms.getInstance().insert(room105);
 
-        System.out.println(new DBRooms().getAll());
+        System.out.println(new DBRoom().getAll());
     }
 }
